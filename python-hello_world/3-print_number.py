@@ -1,3 +1,3 @@
 #!/usr/bin/python3
-variable = 98
-print (f"{variable} Battery street")
+number = 98
+print(f"{number} Battery street")
