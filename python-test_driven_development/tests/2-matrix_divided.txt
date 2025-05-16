@@ -1,0 +1,76 @@
+Test matrix integer
+
+>>> matrix_divided = __import__('2-matrix_divided').matrix_divided
+
+>>> print(matrix_divided([[1, 2, 3],[4, 5, 6]], 3))
+[[0.33, 0.67, 1.0], [1.33, 1.67, 2.0]]
+
+>>> print(matrix_divided([[1, 2, 3],[4, 5, 0]], 3))
+[[0.33, 0.67, 1.0], [1.33, 1.67, 0.0]]
+
+>>> print(matrix_divided([[1, 2, 3],[4, 5, 0]], 3))
+[[0.33, 0.67, 1.0], [1.33, 1.67, 0.0]]
+
+>>> print(matrix_divided([[1, 2, 3],[4, 5, 3 + 3]], 3))
+[[0.33, 0.67, 1.0], [1.33, 1.67, 2.0]]
+
+>>> print(matrix_divided([[-1, -22, -333],[4, 5, 3]], 3))
+[[-0.33, -7.33, -111.0], [1.33, 1.67, 1.0]]
+
+>>> print(matrix_divided([[1, 2, 3],[4, 5]], 3))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/jeff/holbertonschool-higher_level_programming/python-test_driven_development/2-matrix_divided.py", line 15, in matrix_divided
+    raise TypeError("Each row of the matrix must have the same size")
+TypeError: Each row of the matrix must have the same size
+
+>>> print(matrix_divided([[-1, -22, -333],[-4, -5, 10e1000]], 3))
+[[-0.33, -7.33, -111.0], [-1.33, -1.67, inf]]
+
+Test matrix float
+
+>>> print(matrix_divided([[6.4, 8.2, 556.654],[-4, -5, 2.6465 ]], 3))
+[[2.13, 2.73, 185.55], [-1.33, -1.67, 0.88]]
+
+>>> print(matrix_divided([[6.4, 8.2, 0.00000000000000000000000000000000000000000000000000000000000000000000000001],[-4, -5, 2.6465 ]], 3))
+[[2.13, 2.73, 0.0], [-1.33, -1.67, 0.88]]
+
+Test divisor
+
+>>> print(matrix_divided([[1, 2, 3],[4, 5, 6]], 3.3))
+[[0.3, 0.61, 0.91], [1.21, 1.52, 1.82]]
+>>> print(matrix_divided([[1, 2, 3],[4, 5, 6]], 0))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/jeff/holbertonschool-higher_level_programming/python-test_driven_development/2-matrix_divided.py", line 19, in matrix_divided
+    raise ZeroDivisionError("division by zero")
+ZeroDivisionError: division by zero
+>>> print(matrix_divided([[1, 2, 3],[4, 5, 6]], None))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/jeff/holbertonschool-higher_level_programming/python-test_driven_development/2-matrix_divided.py", line 17, in matrix_divided
+    raise TypeError("div must be a number")
+TypeError: div must be a number
+>>> print(matrix_divided([[1, 2, 3],[4, 5, 6]], 3 * 3))
+[[0.11, 0.22, 0.33], [0.44, 0.56, 0.67]]
+
+>>> print(matrix_divided([[1, 2, 3],[4, 5, True]], 4))
+[[0.25, 0.5, 0.75], [1.0, 1.25, 0.25]]
+
+>>> print(matrix_divided([[1, 2, 3],[4, 5, 6]], True))
+[[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]]
+
+>>> print(matrix_divided([[1, 2, 3],[4, 5, 6]], False))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/jeff/holbertonschool-higher_level_programming/python-test_driven_development/2-matrix_divided.py", line 19, in matrix_divided
+    raise ZeroDivisionError("division by zero")
+ZeroDivisionError: division by zero
+
+>>> print(matrix_divided([[1, 2, 3],[4, 5, 6]], 'hello'))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/jeff/holbertonschool-higher_level_programming/python-test_driven_development/2-matrix_divided.py", line 17, in matrix_divided
+    raise TypeError("div must be a number")
+TypeError: div must be a number
+
