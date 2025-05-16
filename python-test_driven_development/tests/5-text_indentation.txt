@@ -1,0 +1,86 @@
+>>> text_indentation = __import__('5-text_indentation').text_indentation
+
+Text test
+---------
+
+.. code-block:: python
+
+    >>> text_indentation("Hi. Are you okay? Really: good.")
+    Hi.
+    <BLANKLINE>
+    Are you okay?
+    <BLANKLINE>
+    Really:
+    <BLANKLINE>
+    good.
+    <BLANKLINE>
+
+    >>> text_indentation("Coucou .")
+    Coucou .
+    <BLANKLINE>
+
+    >>> text_indentation(".   :   ?")
+    .
+    <BLANKLINE>
+    :
+    <BLANKLINE>
+    ?
+    <BLANKLINE>
+
+    >>> text_indentation("No punctuation here")
+    No punctuation here
+
+    >>> text_indentation("First.    Second?   Third:   Done.")
+    First.
+    <BLANKLINE>
+    Second?
+    <BLANKLINE>
+    Third:
+    <BLANKLINE>
+    Done.
+    <BLANKLINE>
+
+    >>> text_indentation("")
+    
+    >>> text_indentation("...Multiple dots. And: multiple column: and questions??")
+    .
+    <BLANKLINE>
+    .
+    <BLANKLINE>
+    .
+    <BLANKLINE>
+    Multiple dots.
+    <BLANKLINE>
+    And:
+    <BLANKLINE>
+    multiple colons:
+    <BLANKLINE>
+    and questions?
+    <BLANKLINE>
+    ?
+    <BLANKLINE>
+
+    >>> text_indentation("Hello?Yes:Great.End.")
+    Hello?
+    <BLANKLINE>
+    Yes:
+    <BLANKLINE>
+    Great.
+    <BLANKLINE>
+    End.
+    <BLANKLINE>
+
+    >>> text_indentation("1.6")
+    1.
+    <BLANKLINE>
+    6
+
+    >>> text_indentation("test", ".test")
+    Traceback (most recent call last):
+        ...
+    TypeError: text_indentation() takes 1 positional argument but 2 were given
+
+    >>> text_indentation(["hello."])
+    Traceback (most recent call last):
+        ...
+    TypeError: text must be a string
