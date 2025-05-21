@@ -1,13 +1,26 @@
 #!/usr/bin/python3
 
-class Square:
-    def __init__(self, size=0):
-        if not isinstance(value, int):
-            raise TypeError("size must be an integer")
-        if size < 0:
-            raise ValueError("size must be >= 0")
-        self.__size = size
+"""
+This script defines a "Square" class to represent a square.
+"""
 
-    def area(self):
-         return self.__size * self.__size
-            
+
+class Square:
+    """
+    This is the Square class with a private instance attribute: __size.
+    """
+
+    def __init__(self, size=0):
+        """
+        Initializes a new Square instance.
+
+        Args:
+            size (int): The size of the square.
+                It must be a non-negative integer.
+        """
+        if type(size) is not int:
+            raise TypeError("size must be an integer")
+        elif size < 0:
+            raise ValueError("size must be >= 0")
+        else:
+            self.__size = size
