@@ -2,8 +2,11 @@
 """
 create an empty class
 """
+
+
 class BaseGeometry:
     """
     define BaseGeometry class
     """
+
     pass
