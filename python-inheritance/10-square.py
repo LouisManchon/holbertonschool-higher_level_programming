@@ -73,4 +73,4 @@ class Square(Rectangle):
         Define area
         """
 
-        return self.__size * self.__size
+        raise Exception("area() is not implemented")
