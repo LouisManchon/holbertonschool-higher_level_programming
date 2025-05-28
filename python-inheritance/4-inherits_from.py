@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-check if the object is an instance of a class that inherited (directly or indirectly) from the specified class
+check if the object is an instance of a class that inherited specified class
 """
 
 
@@ -9,7 +9,7 @@ def inherits_from(obj, a_class):
     the object and the class
     """
 
-    if issubclass(obj,(a_class)) and type(obj) != a_class:
+    if issubclass(obj(a_class)) and type(obj) is a_class:
         """
         condition that check if True or False
         """
