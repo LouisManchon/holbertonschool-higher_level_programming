@@ -2,18 +2,22 @@
 """
 This module is just a class
 """
+
+
 class BaseGeometry:
     """
     This is the BaseGeometry class
     """
+
     def area(self):
         """
         Raises an Exception indicating that area is not implemented
         """
+
         raise Exception("area() is not implemented")
 
     def integer_validator(self, name, value):
-         """
+        """
         Validates that value is a positive integer.
         i
 
@@ -25,16 +29,19 @@ class BaseGeometry:
             TypeError: If value is not an integer.
             ValueError: If value is less than or equal to 0.
         """
-         if type(value) is not int:
+
+        if type(value) is not int:
             raise TypeError("{} must be an integer".format(name))
 
-         if value <= 0:
+        if value <= 0:
             raise ValueError("{} must be greater than 0".format(name))
+
 
 class Rectangle(BaseGeometry):
     """
     Initializes a rectangle with width and height
     """
+
     def __init__(self, width, height):
         self.integer_validator("width", width)
         self.integer_validator("height", height)
