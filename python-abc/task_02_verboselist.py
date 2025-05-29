@@ -1,19 +1,19 @@
 #!/usr/bin/python3
-class VerboseList(list)
-
-
+class VerboseList(list):
     def append(self, item):
-        super().append(item):
-        print("Added [item] to the list.")
+        super().append(item)
+        print("Added [{}] to the list.".format(item))
 
     def extend(self, iterable):
-        super().extend(iterable):
-        print("Extended the list with [x] items.")
+        count = len(list(iterable))
+        super().extend(iterable)
+        print("Extended the list with [{}] items.".format(count))
 
-    def remove(item):
-        super().remove(item):
-        print("Removed [item] from the list.")
+    def remove(self, item):
+        print("Removed [{}] from the list.".format(item))
+        super().remove(item)
 
-    def pop(index):
-        super().pop(index):
-        print("Popped [item] from the list.")
+    def pop(self, index=-1):
+        item = self[index]
+        print("Popped [{}] from the list.".format(item))
+        return super().pop(index)
