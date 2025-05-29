@@ -52,7 +52,9 @@ class Rectangle(Shape):
         return 2 * (self.width + self.height)
 
 
-# ✅ Cette fonction doit être ici, EN DEHORS des classes
 def shape_info(shape):
-    print("Area:", shape.area())
-    print("Perimeter:", shape.perimeter())
+    """
+    Displays area and perimeter of a shape using duck typing
+    """
+    print("Area: {:.2f}".format(shape.area()))
+    print("Perimeter: {:.2f}".format(shape.perimeter()))
