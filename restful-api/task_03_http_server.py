@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
+import threading
+import time
 
 class SimpleHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -29,8 +31,15 @@ class SimpleHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b"Endpoint not found")
 
-def run(server_class=HTTPServer, handler_class=SimpleHandler):
+def run_server():
     server_address = ("", 8000)
-    httpd = server_class(server_address, handler_class)
+    httpd = HTTPServer(server_address, SimpleHandler)
     print("Server running on http://localhost:8000")
     httpd.serve_forever()
+
+if __name__ == "__main__":
+    server_thread = threading.Thread(target=run_server)
+    server_thread.daemon = True
+    server_thread.start()
+
+    time.sleep(5)
