@@ -1,4 +1,4 @@
-#!~/myvenv/bin/python3
+#!/home/therock/myvenv/bin/python3
 """
 Module containing function listing states from a database.
 """
@@ -7,9 +7,6 @@ import MySQLdb
 
 
 def main():
-    """
-    Lists all states starting with 'N' ordered by id from a database.
-    """
     username = sys.argv[1]
     password = sys.argv[2]
     database = sys.argv[3]
