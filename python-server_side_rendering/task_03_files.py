@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request
-import json, csv
+import json
+import csv
 
 app = Flask(__name__)
-filePathCSV = "products.csv"
-filePathjson = "products.json"
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -18,40 +18,56 @@ def contact():
 
 @app.route('/items')
 def items():
-    try:
-        with open('items.json', 'r', encoding='utf-8') as i:
-            datas = json.load(i)
-        return render_template('items.html', items=datas.get("items"))
-    except Exception as e:
-        print({"error": "{}".format(e)})
+    with open('items.json') as f:
+        data = json.load(f)
+    items_list = data.get("items", [])
+    return render_template('items.html', items=items_list)
 
 @app.route('/products')
 def products():
-    source = request.args.get("source")
-    if not source or source not in ("json", "csv"):
-        return render_template("product_display.html", error="Wrong source")
+    source = request.args.get("source", "json")
+    prod_id = request.args.get("id")
+    products_list = []
+    error = None
 
-    id = request.args.get("id")
-    products = []
     try:
         if source == "json":
-            with open(filePathjson, 'r', encoding='utf-8') as f:
-                products = json.load(f)
+            with open('products.json', encoding='utf-8') as f:
+                data = json.load(f)
+            products_list = data
         elif source == "csv":
-            with open(filePathCSV, 'r', encoding='utf-8') as f:
-                products = list(csv.DictReader(f))
+            with open('products.csv', encoding='utf-8') as f:
+                reader = csv.DictReader(f)
+                products_list = [
+                    {
+                        "id": int(row["id"]),
+                        "name": row["name"],
+                        "category": row["category"],
+                        "price": float(row["price"])
+                    }
+                    for row in reader
+                ]
+        else:
+            error = "Wrong source"
+            products_list = []
+    except Exception:
+        error = f"Erreur lors de la lecture du fichier {source.upper()}."
+        products_list = []
 
-        if not id:
-            return render_template('product_display.html', products=products)
+    if prod_id and not error:
+        try:
+            pid = int(prod_id)
+            filtered = [p for p in products_list if int(p["id"]) == pid]
+            if filtered:
+                products_list = filtered
+            else:
+                error = "Product not found"
+                products_list = []
+        except Exception:
+            error = "Invalid id value"
+            products_list = []
 
-        for product in products:
-            if str(product.get("id")) == str(id):
-                return render_template('product_display.html', products=[product])
+    return render_template('product_display.html', products=products_list, error=error)
 
-        return render_template('product_display.html', error="Product not found")
-
-    except Exception as e:
-        print({"error": "{}".format(e)})
-        return render_template('product_display.html', error="Error loading products")
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True)
