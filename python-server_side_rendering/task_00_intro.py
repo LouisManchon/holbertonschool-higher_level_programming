@@ -1,33 +1,22 @@
-import os
-
-def get_value(attendee, key):
-    value = attendee.get(key, None)
-    return value if value not in [None, ""] else "N/A"
-
 def generate_invitations(template, attendees):
     if not isinstance(template, str):
-        print("Error: Template must be a string.")
-        return
-    if not isinstance(attendees, list) or not all(isinstance(a, dict) for a in attendees):
-        print("Error: Attendees must be a list of dictionaries.")
-        return
-    if not template:
-        print("Template is empty, no output files generated.")
-        return
+        return "Invalid template type: expected string"
+    if not isinstance(attendees, list):
+        return "Invalid attendees type: expected list of dictionaries"
+    if not template.strip():
+        return "Template is empty, no output files generated"
     if not attendees:
-        print("No data provided, no output files generated.")
-        return
+        return "No data provided"
 
-    for idx, attendee in enumerate(attendees, start=1):
-        output = template
-        output = output.replace("{name}", get_value(attendee, "name"))
-        output = output.replace("{event_title}", get_value(attendee, "event_title"))
-        output = output.replace("{event_date}", get_value(attendee, "event_date"))
-        output = output.replace("{event_location}", get_value(attendee, "event_location"))
+    placeholders = ["name", "event_title", "event_date", "event_location"]
 
-        filename = f"output_{idx}.txt"
-        try:
-            with open(filename, "w", encoding="utf-8") as f:
-                f.write(output)
-        except Exception as e:
-            print(f"Error writing file {filename}: {e}")
+    for i, attendee in enumerate(attendees, 1):
+        content = template
+        for key in placeholders:
+            value = attendee.get(key)
+            if value is None:
+                value = "N/A"
+            content = content.replace("{" + key + "}", str(value))
+        filename = f"output_{i}.txt"
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write(content)
